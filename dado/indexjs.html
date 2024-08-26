@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogando Dado com JS</title>
+    <script>
+        function JogaDado() {
+            dado = Math.floor((Math.random() * 6) + 1);
+            document.getElementById("dado").innerHTML = "<img src='img/dado"+dado+".jpg'>";
+        }
+    </script>
+</head>
+<body>
+    <button onclick="JogaDado()">Jogar Dado</button>
+    <div id="dado"></div>
+</body>
+</html>
