@@ -45,8 +45,9 @@
         <button name="bcacular">Calcular IMC</button>
     </form>
     <?php
+    require_once "imc.php";
     if ($_POST) {
-        $imc = ($_POST["ipeso"] / ($_POST["ialtura"] * $_POST["ialtura"]));
+        $imc = imc($_POST["ialtura"],$_POST["ipeso"]);
         echo $_POST["inome"]." seu IMC é ".$imc;
         echo "<br>";
         if ($imc < 18.5) { 
