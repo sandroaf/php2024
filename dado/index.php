@@ -11,10 +11,19 @@
     </form>
     <br>
     <?php
-       if (isset($_POST["jogardado "])) {
+       session_start();
+       if (isset($_SESSION["ultimo_dado"])) {
+            echo "<br>";
+            echo "<h3>Último sorteio</h3>";
+            echo "<img width='64px' src='img/dado".$_SESSION["ultimo_dado"].".jpg'>";
+        }
+       if (isset($_POST["jogardado"])) {
+           echo "<br>";
+           echo "<h3>Sorteio atual</h3>";
            $dado = rand(1,6);
-           echo "<img src='img/dado$dado.jpg'>";
-       }
+           $_SESSION["ultimo_dado"] = $dado;
+           echo "<img width='64px' src='img/dado$dado.jpg'>";
+       } 
     ?>
 </body>
 </html>
