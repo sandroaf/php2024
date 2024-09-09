@@ -1,0 +1,12 @@
+Funções de Manipulação de Arquivos:
+basename — Retorna a última parte do caminho
+file_exists — Verifica se um arquivo ou diretório existe
+filesize — Obtém o tamanho do arquivo
+filetype — Lê o tipo do arquivo
+fopen — Abre um arquivo ou URL
+fread — Leitura de arquivo segura para binário
+fwrite — Escrita binary-safe em arquivos
+is_file — Informa se o arquivo é um arquivo comum
+feof — Testa pelo fim-de-arquivo em um ponteiro de arquivo
+fclose — Fecha um ponteiro de arquivo aberto
+copy — Copia arquivo
