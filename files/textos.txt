@@ -1,0 +1,2 @@
+Esse arquivo contém outros textos que podem ser lidos pela aplicação
+Se incluir mais linhas, essas serão apresentadas. 

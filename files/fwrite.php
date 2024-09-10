@@ -6,6 +6,7 @@
     <title>Escrevendo em arquivos com fwrite</title>
 </head>
 <body>
+    <h2>Escrevendo em arquivos com fwrite</h2>
     <?php
     $filename = 'test.txt';
     if (isset($_POST['frase'])) {
@@ -14,10 +15,10 @@
         if (is_writable($filename)) {
             // Nesse exemplo estamos abrindo o $filename em modo append.
             // O ponteiro do arquivo estará no final do arquivo
-            // e portanto é aqui que $somecontent será posicionado pelo fwrite().
+            // e portanto é aqui que $linha será posicionado pelo fwrite().
             if (!$fp = fopen($filename, 'a')) {
                 echo "Erro ao abrir o ($filename)";
-                exit;
+                exit; //interrompe a aplicação
             }
 
             // Escrever alguma coisa no arquivo.
@@ -28,7 +29,9 @@
 
             echo "Sucesso, escrito ($linha) no arquivo ($filename)<br>";
             fclose($fp);
+            echo "<pre>";
             echo file_get_contents($filename);
+            echo "</pre>";
         } else {
             echo "O arquivo não existe ou permite escrita";
         }

@@ -6,22 +6,26 @@
     <title>Enviar arquivos</title>
 </head>
 <body>
+    <h2>Enviar arquivos</h2>
     <?php
     if (isset($_FILES['arquivo'])) {
+        //echo "<pre>";
+        var_dump($_POST);
+        //#echo "</pre>";
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["arquivo"]["name"]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
         // Check if image file is a actual image or fake image
         if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
-        if($check !== false) {
-            echo "Arquivo é uma imagem - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            echo "Arquivo não é uma imagem.";
-            $uploadOk = 0;
-        }
+            $check = getimagesize($_FILES["arquivo"]["tmp_name"]);
+            if($check !== false) {
+                echo "Arquivo é uma imagem - " . $check["mime"] . ".<br>";
+                $uploadOk = 1;
+            } else {
+                echo "Arquivo não é uma imagem.<br>";
+                $uploadOk = 0;
+            }
         }
         
         // Check if file already exists
@@ -59,9 +63,9 @@
     <!-- ### Para enviar arquivos necessário: enctype="multipart/form-data" no FORM -->
     <form action="fsend.php" method="POST" enctype="multipart/form-data">
         <label for="aquivo">Arquivo: </label>
-        <input name="arquivo" id="frase" type="file">
+        <input type="file" name="arquivo" id="arquivo" >
         <br>
-        <button type="submit">Enviar</button>
+        <button type="submit" id="submit" name="submit">Enviar</button>
         <br>
     </form>
     <?php include_once("menu.php"); ?>
