@@ -8,7 +8,7 @@
 <body>
     <?php
        $db_servidor = "localhost";
-       $db_nome = "listadecompras";
+       $db_nome = "lista_compras";
        $db_user = "root";
        $db_senha = "";
 

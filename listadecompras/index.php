@@ -3,32 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Acessando Banco de Dados</title>
+    <title>Lista de Compras</title>
 </head>
 <body>
+    <h1>Lista de Compras</h1>
     <?php
-       $db_servidor = "localhost";
-       $db_nome = "listadecompras";
-       $db_user = "root";
-       $db_senha = "";
-
+       require_once('conexao.php');
        try {
-          $conn = new PDO("mysql:host=$db_servidor;dbname=$db_nome",$db_user,$db_senha);
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-
-          echo "Acessando: $db_nome";
-
           $stmt = $conn->prepare("SELECT * FROM lista");
           $stmt->execute();
-          echo "<br><ul>";
-          foreach ($stmt as $linha) {
-            
-            echo "<li>";
-            echo "<a href='listaitem.php?lista=".$linha["codigo"]."&nome=".$linha["nome"]."'>".$linha["codigo"]." - ".$linha["nome"]."</a>";
-            echo "</li>";
+          foreach ($stmt as $linha) {            
+            echo "<details>";
+            echo "<summary>".$linha["codigo"]." - ".$linha["nome"]."</summary>";
+                $stmtitem = $conn->prepare("SELECT * FROM item where codigo_lista = ".$linha["codigo"]);
+                $stmtitem->execute();
+                echo "<ul>";
+                foreach ($stmtitem as $linhaitem) {         
+                echo "<li>";
+                echo $linhaitem["codigo"]." - ".$linhaitem["descricao"]." - ".$linhaitem["quantidade"]." - ".$linhaitem["datahora"]." - ".$linhaitem["codigo_lista"];
+                echo "</li>";
+                }
+                echo "</ul>";
+            echo "</details>";
           }
-          echo "</ul>";
-
        } catch (PDOException $e) {
            echo "Erro ao conectar no Banco de Dados <br>".$e->getMessage(); 
        }
