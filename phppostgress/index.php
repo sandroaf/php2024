@@ -1,4 +1,8 @@
 <?php
+//Precisa habilitar extensões no php.ini 
+//extension=pdo_pgsql 
+//extension=pgsql
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
