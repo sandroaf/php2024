@@ -3,41 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>  
+    <link rel='stylesheet' href='estilo.css'>
+
     <title>Lista de Compras - Salvar Alteração Lista</title>
 </head>
 <body>
-    <h1>Lista de Compras - Salvando Lista Alterada</h1>
-    <?php 
-        require_once('conexao.php');
-        if (isset($_POST["icodigo"])) {
-            if ($_POST["inome"] != "") {
-                try {
-                    $nome = $_POST['inome'];
-                    $codigo = $_POST['icodigo'];
+    <div class="conteudo">
+        <h1>Lista de Compras - Salvando Lista Alterada</h1>
+        <?php 
+            require_once('conexao.php');
+            if (isset($_POST["icodigo"])) {
+                if ($_POST["inome"] != "") {
+                    try {
+                        $nome = $_POST['inome'];
+                        $codigo = $_POST['icodigo'];
 
-                    $fmtquery = "UPDATE lista SET nome = \"%s\"
-                     WHERE codigo = %d";
+                        $fmtquery = "UPDATE lista SET nome = \"%s\"
+                        WHERE codigo = %d";
 
-                    $query = sprintf($fmtquery,
-                                     $nome,
-                                     $codigo);
-                    echo $query;
-                    $stmt = $conn->prepare($query);
-                    if ($stmt->execute()) {
-                        echo "Lista: ".$nome."<br>Alterada com sucesso";
+                        $query = sprintf($fmtquery,
+                                        $nome,
+                                        $codigo);
+                        //echo $query;
+                        $stmt = $conn->prepare($query);
+                        if ($stmt->execute()) {
+                            echo "Lista: ".$nome."<br>Alterada com sucesso";
+                        }
+                    } catch (PDOException $e) {
+                        echo "Erro ao alterar a lista <br>".$e->getMessage(); 
                     }
-                } catch (PDOException $e) {
-                    echo "Erro ao alterar a lista <br>".$e->getMessage(); 
+                } else {
+                    echo "Erro ao Alterar! Os dados devem ser informados";
                 }
             } else {
-                echo "Erro ao Alterar! Os dados devem ser informados";
+                "Erro ao chamar rotina para Alterar Lista";
             }
-        } else {
-            "Erro ao chamar rotina para Alterar Lista";
-        }
-    ?>
-    <br>
-    <br>
-    <button onclick="location.assign('index.php')"><< Voltar</button>
-</body>
+        ?>
+        <br>
+        <br>
+        <button onclick="location.assign('index.php')"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
+    </div>
+    </body>
 </html>

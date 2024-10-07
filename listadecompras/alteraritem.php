@@ -24,26 +24,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>  
+    <link rel='stylesheet' href='estilo.css'>
+
     <title>Lista de Compras - Alterar Item</title>
 </head>
 <body>
-    <h1>Alterar Item - <?=$item['codigo']?></h1>
-    <form action="salvaalteracaoitem.php" method="post">
-        <input type="hidden" name="icodigoitem" value="<?=$item['codigo']?>">
-        <label for="ilista">Lista:</label>
-        <input type="text" name="ilista" id="ilista" value="<?=$item['codigo_lista']?>" size="3" readonly/> - <?=$item['nome']?>
+    <div class="conteudo">
+        <h1>Alterar Item - <?=$item['codigo']?></h1>
+        <form action="salvaalteracaoitem.php" method="post">
+            <input type="hidden" name="icodigoitem" value="<?=$item['codigo']?>">
+            <label for="ilista">Lista:</label>
+            <input type="text" name="ilista" id="ilista" value="<?=$item['codigo_lista']?>" size="3" readonly/> - <?=$item['nome']?>
+            <br>
+            <label for="idescricao">Descricao:</label>
+            <input type="text" name="idescricao" id="idescricao" placeholder="Informe a descrição do item" size="80" value="<?=$item['descricao']?>">
+            <br>
+            <label for="iquantidade">Quantidade</label>
+            <input type="number" value="<?=$item['quantidade']?>" name="iquantidade" id="iquantidade" size="3">
+            <br>
+            <br>
+            <button type="submit" name="bsubmit" id="bsubmit">Salvar</button>
+            <button type="reset" name="breset" id="breset">Cancelar</button>
+        </form>
         <br>
-        <label for="idescricao">Descricao:</label>
-        <input type="text" name="idescricao" id="idescricao" placeholder="Informe a descrição do item" size="80" value="<?=$item['descricao']?>">
-        <br>
-        <label for="iquantidade">Quantidade</label>
-        <input type="number" value="<?=$item['quantidade']?>" name="iquantidade" id="iquantidade" size="3">
-        <br>
-        <br>
-        <button type="submit" name="bsubmit" id="bsubmit">Salvar</button>
-        <button type="reset" name="breset" id="breset">Cancelar</button>
-    </form>
-    <br>
-    <button onclick="history.back()"><< Voltar</button>
+        <button onclick="history.back()"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
+    </div>
 </body>
 </html>

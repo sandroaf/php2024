@@ -1,11 +1,46 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: gainsboro;
+}
+
+.conteudo {
+    padding: 10px;
+    margin: 10px auto;
+    border-left: 4px solid gray;
+    width: 90%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color:  whitesmoke;
+}
+
+h1 {
+    text-align: center;
+    width: 100%;
+}
+details {
+    border-bottom: 1px dashed gray;
+    margin-bottom: 5px;
+}
+
+small {
+    font-size: smaller;
+    color: grey;
+}
+
 button {
     margin: 0;
-    padding: 3px;
+    padding: 5px 5px 3px 5px;
     border: none;
     background-color: inherit;
     cursor: pointer;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+li {
+    list-style-type: '#';
 }
 
 button:hover {
-    background-color: lightgray;
+    background-color: lightgrey;
 }
