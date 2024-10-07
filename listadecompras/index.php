@@ -25,6 +25,7 @@
             foreach ($stmtitem as $linhaitem) {         
                 echo "<li>";
                 echo $linhaitem["codigo"]." - ".$linhaitem["descricao"]." - ".$linhaitem["quantidade"]." - ".$linhaitem["datahora"]." - ".$linhaitem["codigo_lista"];
+                echo "&nbsp;<button onclick=\"location.assign('alteraritem.php?item=".$linhaitem["codigo"]."')\"> A </button></summary>";
                 echo "</li>";
             }
             echo "</ul>";
