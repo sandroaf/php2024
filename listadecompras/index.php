@@ -58,7 +58,7 @@
                         } 
                     }
                 }
-                echo "<details>";
+                echo "<details open>";
                 echo "<summary>".$linha["codigo"]." - ".$linha["nome"];
                     echo " <button onclick=\"location.assign('incluiritem.php?lista=".$linha["codigo"]."&nome=".$linha["nome"]."')\"> <i class=\"fi fi-rr-add-document\"></i> </button>";
                     echo "&nbsp;<button onclick=\"location.assign('alterarlista.php?lista=".$linha["codigo"]."')\"><i class=\"fi fi-rr-edit\"></i></button>";
