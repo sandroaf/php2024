@@ -23,29 +23,54 @@
 <body>
     <div class="conteudo">
         <h1>Lista de Compras</h1>
-        <button onclick="location.assign('incluirlista.php')"><i class="fi fi-rr-add-document"></i> Novo</button>
-        <br>
+        <form action="index.php" method="GET">
+            <input type="text" name="ibusca" id="ibusca" size="50">
+            <button type="submit"><i class="fi fi-rr-search"></i></button>
+            <input type="radio" name="itabela" id="itabelaLista" value="Lista"> Lista
+            <input type="radio" name="itabela" id="itabaleItam" value="Item" checked> Item
+        </form>
         <br>
 
+        <button onclick="location.assign('incluirlista.php')"><i class="fi fi-rr-add-document"></i> Novo</button>
+        <br>
         <?php
         require_once('conexao.php');
         try {
-            $stmt = $conn->prepare("SELECT * FROM lista");
+            $sqllista = "SELECT * FROM lista";
+            if (isset($_GET['ibusca'])) {
+                if (isset($_GET['itabela'])) {
+                    if ($_GET['itabela'] == "Lista") {
+                        $sqllista = "SELECT * FROM lista WHERE upper(nome) LIKE upper(\"%".$_GET['ibusca']."%\")";
+                        echo $sqllista;
+                    } 
+                }
+            }
+            $stmt = $conn->prepare($sqllista);
             $stmt->execute();
             foreach ($stmt as $linha) {            
+                $sqlitem = "SELECT * FROM item where codigo_lista = ".$linha
+                ["codigo"];
+                if (isset($_GET['ibusca'])) {
+                    if (isset($_GET['itabela'])) {
+                        if ($_GET['itabela'] == "Item") {
+                            $sqlitem = "SELECT * FROM item where codigo_lista = ".$linha["codigo"]." AND upper(descricao) LIKE upper(\"%".$_GET['ibusca']."%\")";
+                            //echo $sqlitem;
+                        } 
+                    }
+                }
                 echo "<details>";
                 echo "<summary>".$linha["codigo"]." - ".$linha["nome"];
                     echo " <button onclick=\"location.assign('incluiritem.php?lista=".$linha["codigo"]."&nome=".$linha["nome"]."')\"> <i class=\"fi fi-rr-add-document\"></i> </button>";
                     echo "&nbsp;<button onclick=\"location.assign('alterarlista.php?lista=".$linha["codigo"]."')\"><i class=\"fi fi-rr-edit\"></i></button>";
                     echo "&nbsp;<button onclick='excluir(\"lista\",\"".$linha["codigo"]."\")'><i class=\"fi fi-rr-trash\"></i></button>";
                     echo "</summary>";
-                $stmtitem = $conn->prepare("SELECT * FROM item where codigo_lista = ".$linha["codigo"]);
+                $stmtitem = $conn->prepare($sqlitem);
                 $stmtitem->execute();
                 echo "<ul>";
                 foreach ($stmtitem as $linhaitem) {         
                     $timestamp = strtotime($linhaitem["datahora"]);
                     echo "<li>";
-                    echo $linhaitem["codigo"]." - ".$linhaitem["descricao"]." - ".$linhaitem["quantidade"]." - <small>".date('d/m/Y h:m:s', $timestamp)."</small>";
+                    echo $linhaitem["codigo"]." - ".$linhaitem["descricao"]." - ".$linhaitem["quantidade"]." - <small>".date('d/m/Y h:i:s', $timestamp)."</small>";
                     echo "&nbsp;<button onclick=\"location.assign('alteraritem.php?item=".$linhaitem["codigo"]."')\"><i class='fi fi-rr-edit'></i></button>";
                     echo "&nbsp;<button onclick='excluir(\"item\",\"".$linhaitem["codigo"]."\")'><i class=\"fi fi-rr-trash\"></i></button>";
                     echo "</li>";
