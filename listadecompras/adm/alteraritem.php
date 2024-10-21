@@ -1,5 +1,8 @@
 <?php
-    require_once('conexao.php');
+    require_once('../conexao.php');
+    if (!validalogin()) {
+        header("Location: login.php");
+    }    
     if (isset($_GET['item'])) {
         try {
             $sql = "select item.*, lista.nome 
@@ -25,7 +28,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>  
-    <link rel='stylesheet' href='estilo.css'>
+    <link rel='stylesheet' href='../estilo.css'>
 
     <title>Lista de Compras - Alterar Item</title>
 </head>

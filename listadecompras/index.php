@@ -11,10 +11,10 @@
             if (window.confirm('Confirma exclusão '+tabela+' codigo - '+codigo)) {
                 if (tabela == 'item') {
                     //exclui item
-                    location.assign('excluiitem.php?item='+codigo);
+                    location.assign('adm/excluiitem.php?item='+codigo);
                 } else if (tabela == 'lista') {
                     //exclui lista
-                    location.assign('excluilista.php?lista='+codigo);
+                    location.assign('adm/excluilista.php?lista='+codigo);
                 }
             }
         }
@@ -30,18 +30,23 @@
             <input type="radio" name="itabela" id="itabaleItam" value="Item" checked> Item
         </form>
         <br>
-
-        <button onclick="location.assign('incluirlista.php')"><i class="fi fi-rr-add-document"></i> Novo</button>
-        <br>
+        <?php 
+           require_once('conexao.php');
+           if (validalogin()) {
+        ?>
+            <button onclick="location.assign('adm/incluirlista.php')"><i class="fi fi-rr-add-document"></i> Novo</button>
+            <br>
         <?php
-        require_once('conexao.php');
+            }
+        ?>
+        <?php
         try {
             $sqllista = "SELECT * FROM lista";
             if (isset($_GET['ibusca'])) {
                 if (isset($_GET['itabela'])) {
                     if ($_GET['itabela'] == "Lista") {
                         $sqllista = "SELECT * FROM lista WHERE upper(nome) LIKE upper(\"%".$_GET['ibusca']."%\")";
-                        echo $sqllista;
+                        //echo $sqllista;
                     } 
                 }
             }
@@ -60,10 +65,12 @@
                 }
                 echo "<details open>";
                 echo "<summary>".$linha["codigo"]." - ".$linha["nome"];
-                    echo " <button onclick=\"location.assign('incluiritem.php?lista=".$linha["codigo"]."&nome=".$linha["nome"]."')\"> <i class=\"fi fi-rr-add-document\"></i> </button>";
-                    echo "&nbsp;<button onclick=\"location.assign('alterarlista.php?lista=".$linha["codigo"]."')\"><i class=\"fi fi-rr-edit\"></i></button>";
+                if (validalogin()) {
+                    echo " <button onclick=\"location.assign('adm/incluiritem.php?lista=".$linha["codigo"]."&nome=".$linha["nome"]."')\"> <i class=\"fi fi-rr-add-document\"></i> </button>";
+                    echo "&nbsp;<button onclick=\"location.assign('adm/alterarlista.php?lista=".$linha["codigo"]."')\"><i class=\"fi fi-rr-edit\"></i></button>";
                     echo "&nbsp;<button onclick='excluir(\"lista\",\"".$linha["codigo"]."\")'><i class=\"fi fi-rr-trash\"></i></button>";
-                    echo "</summary>";
+                }
+                echo "</summary>";
                 $stmtitem = $conn->prepare($sqlitem);
                 $stmtitem->execute();
                 echo "<ul>";
@@ -71,8 +78,10 @@
                     $timestamp = strtotime($linhaitem["datahora"]);
                     echo "<li>";
                     echo $linhaitem["codigo"]." - ".$linhaitem["descricao"]." - ".$linhaitem["quantidade"]." - <small>".date('d/m/Y h:i:s', $timestamp)."</small>";
-                    echo "&nbsp;<button onclick=\"location.assign('alteraritem.php?item=".$linhaitem["codigo"]."')\"><i class='fi fi-rr-edit'></i></button>";
-                    echo "&nbsp;<button onclick='excluir(\"item\",\"".$linhaitem["codigo"]."\")'><i class=\"fi fi-rr-trash\"></i></button>";
+                    if (validalogin()) {
+                        echo "&nbsp;<button onclick=\"location.assign('adm/alteraritem.php?item=".$linhaitem["codigo"]."')\"><i class='fi fi-rr-edit'></i></button>";
+                        echo "&nbsp;<button onclick='excluir(\"item\",\"".$linhaitem["codigo"]."\")'><i class=\"fi fi-rr-trash\"></i></button>";
+                    }
                     echo "</li>";
                 }
                 echo "</ul>";
@@ -82,5 +91,14 @@
             echo "Erro ao conectar no Banco de Dados <br>".$e->getMessage(); 
         }
         ?>
+        <div id="login">
+            <?php
+                if (validalogin()) {
+                    echo "<a href='adm/logout.php'>Sair</a>";
+                } else {
+                    echo "<a href='adm/login.php'>Entrar</a>";
+                }
+            ?>
+        </div> 
     </div>
 </html>

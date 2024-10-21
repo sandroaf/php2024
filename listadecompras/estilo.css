@@ -44,3 +44,10 @@ li {
 button:hover {
     background-color: lightgrey;
 }
+
+#login {
+    text-align: center;
+    width: 100%;
+    font-style: italic;
+    font-size: small;
+}

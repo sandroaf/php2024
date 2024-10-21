@@ -4,6 +4,7 @@
    $db_nome = "lista_compras";
    $db_user = "root";
    $db_senha = "";
+   @require_once('adm/seguranca.php');
 
    try {
       $conn = new PDO("mysql:host=$db_servidor;dbname=$db_nome",$db_user,$db_senha);
