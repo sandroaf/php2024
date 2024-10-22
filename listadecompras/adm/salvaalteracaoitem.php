@@ -23,12 +23,13 @@
                             $quantidade = $_POST['iquantidade'];
                             $codigoitem = $_POST['icodigoitem'];
 
-                            $fmtquery = "UPDATE item SET descricao = \"%s\", quantidade = %d WHERE codigo = %d";
+                            $fmtquery = "UPDATE item SET descricao = \"%s\", quantidade = %d WHERE codigo = %d AND usuario_nome = \"%s\"";
 
                             $query = sprintf($fmtquery,
                                             $descricao,
                                             $quantidade,
-                                            $codigoitem);
+                                            $codigoitem,
+                                            $_SESSION['usuario']);
                             //echo $query;
                             $stmt = $conn->prepare($query);
                             if ($stmt->execute()) {
@@ -47,7 +48,7 @@
         ?>
         <br>
         <br>
-        <button onclick="location.assign('../index.php')"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
+        <button onclick="location.assign('listas.php')"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
     </div>
 </body>
 </html>

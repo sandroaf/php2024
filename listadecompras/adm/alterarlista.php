@@ -7,9 +7,10 @@
         try {
             $sql = "select * 
                      from lista 
-                     where codigo = %d";
+                     where codigo = %d
+                     and usuario_nome = '%s'";
 
-            $query = sprintf($sql,$_GET['lista']);
+            $query = sprintf($sql,$_GET['lista'],$_SESSION['usuario']);
             //echo $query;
             $stmt = $conn->prepare($query);
             $stmt->execute();

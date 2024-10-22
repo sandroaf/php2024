@@ -19,7 +19,7 @@
                 if (isset($_POST["inome"])) {
                     if ($_POST["inome"] != "") {
                         try {
-                            $stmt = $conn->prepare("INSERT INTO lista (nome) VALUES ('".$_POST["inome"]."');");
+                            $stmt = $conn->prepare("INSERT INTO lista (nome, usuario_nome) VALUES ('".$_POST["inome"]."','".$_SESSION['usuario']."');");
                             if ($stmt->execute()) {
                                 echo "Lista: ".$_POST["inome"]."<br>Incluída com sucesso";
                             }
@@ -36,7 +36,7 @@
         ?>
         <br>
         <br>
-        <button onclick="location.assign('../index.php')"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
+        <button onclick="location.assign('listas.php')"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
     </div>
 </body>
 </html>

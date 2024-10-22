@@ -8,9 +8,10 @@
             $sql = "select item.*, lista.nome 
                      from item, lista 
                      where item.codigo = %d 
-                       and item.codigo_lista = lista.codigo";
+                       and item.codigo_lista = lista.codigo
+                       and item.usuario_nome = '%s'";
 
-            $query = sprintf($sql,$_GET['item']);
+            $query = sprintf($sql,$_GET['item'],$_SESSION['usuario']);
             //echo $query;
             $stmt = $conn->prepare($query);
             $stmt->execute();

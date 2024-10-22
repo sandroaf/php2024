@@ -23,11 +23,12 @@
                             $codigo = $_POST['icodigo'];
 
                             $fmtquery = "UPDATE lista SET nome = \"%s\"
-                            WHERE codigo = %d";
+                            WHERE codigo = %d AND usuario_nome = \"%s\"";
 
                             $query = sprintf($fmtquery,
                                             $nome,
-                                            $codigo);
+                                            $codigo,
+                                            $_SESSION['usuario']);
                             //echo $query;
                             $stmt = $conn->prepare($query);
                             if ($stmt->execute()) {
@@ -46,7 +47,7 @@
         ?>
         <br>
         <br>
-        <button onclick="location.assign('../index.php')"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
+        <button onclick="location.assign('listas.php')"><i class="fi fi-rr-arrow-left"></i> Voltar</button>
     </div>
     </body>
 </html>
