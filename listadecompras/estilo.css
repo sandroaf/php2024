@@ -51,3 +51,47 @@ button:hover {
     font-style: italic;
     font-size: small;
 }
+
+table.numeros {
+    margin: 30px auto;
+    width: 90%;
+    border-collapse: collapse;
+    padding: 10px 10%;
+}
+
+table.numeros th {
+    border: 1px solid gray;
+    padding: 10px;
+    text-align: center;
+    width: 33%;
+}
+
+table.numeros td {
+    border: 1px solid darkgray;
+    padding: 20px;
+    text-align: center;
+}
+
+th.usuarios {
+    background-color: #009800;
+}
+
+th.listas {
+    background-color: #ff6200;
+}
+
+th.itens {
+    background-color: #5500ff;
+}
+
+td.usuarios {
+    background-color: #36dc36;
+}
+
+td.listas {
+    background-color: #fb8a43;
+}
+
+td.itens {
+    background-color: #8b52fe;
+}
